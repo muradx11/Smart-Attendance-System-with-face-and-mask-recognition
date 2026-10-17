@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register Student</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            color: #1f2937;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .register-card {
+            background: white;
+            width: 420px;
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 18px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: #16a34a;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #15803d;
+        }
+
+        #message {
+            margin-top: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="register-card">
+
+        <h1>Register Student</h1>
+
+        <p class="subtitle">
+            Add student details to the attendance system.
+        </p>
+
+        <label for="rollNumber">Enrollment Number</label>
+
+        <input
+            type="text"
+            id="rollNumber"
+            placeholder="Enter enrollment number"
+        >
+
+        <label for="studentName">Student Name</label>
+
+        <input
+            type="text"
+            id="studentName"
+            placeholder="Enter student name"
+        >
+
+        <button onclick="registerStudent()">
+            Register Student
+        </button>
+
+        <div id="message"></div>
+
+    </div>
+
+
+    <script>
+
+        async function registerStudent() {
+
+            const enrollmentNumber =
+                document.getElementById("enrollmentNumber").value.trim();
+
+            const name =
+                document.getElementById("studentName").value.trim();
+
+            const message =
+                document.getElementById("message");
+
+
+            if (!enrollmentNumber || !name) {
+
+                message.textContent =
+                    "Please enter roll number and name.";
+
+                message.style.color = "#dc2626";
+
+                return;
+            }
+
+
+            try {
+
+                const response = await fetch(
+                    "/register_student",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            roll_number: enrollmentNumber,
+                            name: name
+                        })
+                    }
+                );
+
+
+                const result = await response.json();
+
+
+                if (result.success) {
+
+                    message.textContent =
+                        "Student registered successfully ✓";
+
+                    message.style.color = "#16a34a";
+
+                    document.getElementById(
+                        "rollNumber"
+                    ).value = "";
+
+                    document.getElementById(
+                        "studentName"
+                    ).value = "";
+
+                } else {
+
+                    message.textContent =
+                        result.message;
+
+                    message.style.color = "#dc2626";
+                }
+
+            } catch (error) {
+
+                message.textContent =
+                    "Something went wrong.";
+
+                message.style.color = "#dc2626";
+
+                console.error(error);
+            }
+        }
+
+    </script>
+
+</body>
+
+</html> 

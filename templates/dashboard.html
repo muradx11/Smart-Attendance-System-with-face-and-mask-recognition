@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Attendance System</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- Header -->
+        <header class="header">
+
+            <div>
+                <h1>Smart Attendance</h1>
+                <p>Face Recognition & Mask Detection</p>
+            </div>
+
+            <div class="session-status">
+                <span class="status-dot"></span>
+                System Ready
+            </div>
+
+        </header>
+
+
+        <!-- Statistics -->
+        <section class="stats">
+
+            <div class="stat-card">
+                <span class="stat-title">Total Students</span>
+                <strong id="totalStudents" data-total="{{ students|length }}">
+                    {{ students|length }}
+                </strong>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-title">Present</span>
+                <strong id="presentStudents">0</strong>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-title">Absent</span>
+                <strong id="absentStudents">0</strong>
+            </div>
+
+            <div class="stat-card timer-card">
+                <span class="stat-title">Time Left</span>
+                <strong id="timer">10:00</strong>
+            </div>
+
+        </section>
+
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- Camera Section -->
+            <section class="camera-section">
+
+                <div class="section-header">
+                    <h2>Live Camera</h2>
+                    <span id="cameraStatus">Camera Off</span>
+                </div>
+
+
+                <!-- Camera Box -->
+                <div class="camera-box">
+
+                    <img
+                        id="cameraFeed"
+                        src=""
+                        alt="Camera Feed"
+                    >
+
+                    <div class="camera-placeholder" id="cameraPlaceholder">
+                        <div class="camera-icon">📷</div>
+                        <h3>Camera Preview</h3>
+                        <p>Camera feed will appear here</p>
+                    </div>
+
+                </div>
+
+
+                <!-- Detection Information -->
+                <div class="detection-info">
+
+                    <div>
+                        <span>Detected Student</span>
+                        <strong id="detectedStudent">---</strong>
+                    </div>
+
+                    <div>
+                        <span>Mask</span>
+                        <strong id="maskStatus">---</strong>
+                    </div>
+
+                    <div>
+                        <span>Liveness</span>
+                        <strong id="livenessStatus">---</strong>
+                    </div>
+
+                    <div>
+                        <span>Confidence</span>
+                        <strong id="confidence">---</strong>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- Attendance List -->
+            <section class="attendance-section">
+
+                <div class="section-header">
+
+                    <h2>Student Attendance</h2>
+
+                    <span id="attendanceCount">
+                        0 / {{ students|length }} Present
+                    </span>
+
+                </div>
+
+
+                <div class="student-list">
+
+                    {% for student in students %}
+
+                    <div class="student-row">
+
+                        <span class="roll">
+                            {{ loop.index }}
+                        </span>
+
+                        <span class="name">
+                            {{ student["roll_number"] }} - {{ student["name"] }}
+                        </span>
+
+                        <span class="attendance-status absent">
+                            -
+                        </span>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <!-- Controls -->
+        <section class="controls">
+
+            <button id="startBtn" class="btn start-btn">
+                ▶ Start Attendance
+            </button>
+
+            <button id="endBtn" class="btn end-btn" disabled>
+                ■ End Session
+            </button>
+
+            <button id="exportSessionBtn" class="btn export-btn">
+                ⬇ Export Last Session
+            </button>
+
+        </section>
+
+    </div>
+
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+
+</body>
+
+</html>

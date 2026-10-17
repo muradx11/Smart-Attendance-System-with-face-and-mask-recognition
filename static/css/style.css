@@ -1,0 +1,282 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+    color: #1f2937;
+}
+
+.app {
+    max-width: 1400px;
+    margin: auto;
+    padding: 25px;
+}
+
+
+/* Header */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.header h1 {
+    font-size: 30px;
+}
+
+.header p {
+    color: #6b7280;
+    margin-top: 5px;
+}
+
+.session-status {
+    background: white;
+    padding: 10px 16px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.status-dot {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    background: #22c55e;
+    border-radius: 50%;
+    margin-right: 7px;
+}
+
+
+/* Statistics */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    background: white;
+    padding: 22px;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+}
+
+.stat-title {
+    display: block;
+    color: #6b7280;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.stat-card strong {
+    font-size: 30px;
+}
+
+.timer-card strong {
+    color: #2563eb;
+}
+
+
+/* Main */
+
+.main-content {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 20px;
+}
+
+.camera-section,
+.attendance-section {
+    background: white;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.section-header h2 {
+    font-size: 19px;
+}
+
+.section-header span {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+
+/* Camera */
+
+.camera-box {
+    height: 430px;
+    background: #111827;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.camera-placeholder {
+    text-align: center;
+    color: #9ca3af;
+}
+
+.camera-icon {
+    font-size: 55px;
+    margin-bottom: 15px;
+}
+
+.camera-placeholder h3 {
+    color: white;
+    margin-bottom: 8px;
+}
+.camera-box {
+    position: relative;
+    overflow: hidden;
+}
+
+#cameraFeed {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    display: none;
+}
+
+.camera-placeholder {
+    text-align: center;
+    color: #9ca3af;
+}
+
+/* Detection */
+
+.detection-info {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.detection-info div {
+    background: #f8fafc;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+.detection-info span {
+    display: block;
+    color: #6b7280;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.detection-info strong {
+    font-size: 14px;
+}
+
+
+/* Student List */
+
+.student-list {
+    max-height: 445px;
+    overflow-y: auto;
+}
+
+.student-row {
+    display: grid;
+    grid-template-columns: 60px 1fr 50px;
+    align-items: center;
+    padding: 14px 10px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.roll {
+    color: #6b7280;
+}
+
+.name {
+    font-weight: 600;
+}
+
+.attendance-status {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.present {
+    color: #16a34a;
+}
+
+.absent {
+    color: #9ca3af;
+}
+
+
+/* Buttons */
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.btn {
+    border: none;
+    padding: 13px 22px;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.start-btn {
+    background: #16a34a;
+    color: white;
+}
+
+.end-btn {
+    background: #dc2626;
+    color: white;
+}
+
+.export-btn {
+    background: #2563eb;
+    color: white;
+}
+
+.btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+
+/* Responsive */
+
+@media (max-width: 900px) {
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+
+    .detection-info {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
